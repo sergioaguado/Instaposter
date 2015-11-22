@@ -3,10 +3,12 @@ library(shiny)
 library(shinydashboard)
 library(RJSONIO)
 library(leaflet)
-library(googleVis)
-source("utils.R")
 
-token <- "3286805.a6db5a4.77093db3a963441f94d09832af5b87bb"
+#library(googleVis)
+source("utils_old.R")
+source("OAuth.R")
+
+#token <- "3286805.a6db5a4.77093db3a963441f94d09832af5b87bb"
 # UI section ----
 
 ## Header content ----
@@ -86,10 +88,12 @@ ui <- dashboardPage(header, sidebar, body)
 
 # SERVER section ----
 server <- function(input, output, session) {
-        
+
         # Calling the app configuration
         if (!exists("token") || is.null(token)) {
-                configApp()     
+                token <- configApp() 
+                print(token)
+                str(session)
         }
         
         # Initialize the map
@@ -130,6 +134,11 @@ server <- function(input, output, session) {
                 }
                 
                 
+#                if(exists("result") & !is.null(result)) {
+#                       result$media 
+#                } else {
+#                        result
+#                }
                 result
                 
         })    
