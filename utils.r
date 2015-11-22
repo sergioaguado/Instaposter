@@ -1,4 +1,4 @@
-library(httr)
+
 library(RCurl)
 library(plyr)
 
@@ -111,7 +111,8 @@ searchMediaRequest <- function(lat, lng, min_timestamp = NULL,
                 media <- RJSONIO:::fromJSON(getURL(URL)) 
         
         } else {
-                media <- NULL
+                media <- RJSONIO:::fromJSON(getURL(URL))
+                #media <- NULL
                 print("JSON ERROR")
         }
         
