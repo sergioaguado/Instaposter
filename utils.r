@@ -104,20 +104,13 @@ searchMediaRequest <- function(lat, lng, min_timestamp = NULL,
                      dist, min_time, max_time, next_id,
                      "&", access_token, sep = "")      
         
-        textJSON <- getURL(URL)
+        #textJSON <- getURL(URL)
+        textJSON <- readLines(URL, warn = F)
         print(URL)
         
-        if (isValidJSON(textJSON, asText = T)) {
-                media <- RJSONIO:::fromJSON(getURL(URL)) 
-        
-        } else {
-                media <- RJSONIO:::fromJSON(getURL(URL))
-                #media <- NULL
-                print("JSON ERROR")
-        }
+        media <- RJSONIO::fromJSON(textJSON)
         
         media
-        #media <- fromJSON(getURL(URL),unexpected.escape = "skip")
         
         
 }
